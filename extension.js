@@ -34,7 +34,11 @@ export default class ShowSystemMenuHotCorner extends Extension {
     }
 
     _trigger() {
-        Main.panel.statusArea.quickSettings.menu.toggle();
+        const menu = Main.panel.statusArea.quickSettings.menu;
+        if (menu.isOpen)
+            menu.close(true);
+        else
+            menu.open(true);
     }
 
     _updatePosition() {
