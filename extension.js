@@ -50,7 +50,11 @@ export default class ShowSystemMenuHotCorner extends Extension {
         const top = corner.includes('top');
 
         const x = left ? monitor.x : monitor.x + monitor.width - 1;
-        const y = top ? monitor.y : monitor.y + monitor.height - 1;
+        // For top corners, sit just below the panel bar so the panel
+        // indicators don't swallow hover events at y=0.
+        const y = top
+            ? monitor.y + Main.panel.get_height()
+            : monitor.y + monitor.height - 1;
 
         this._corner.set_position(x, y);
     }
